@@ -56,20 +56,22 @@ if selected == "홈":
     cols = st.columns(3)
     for idx, project in enumerate(projects):
         with cols[idx]:
-            st.image(project["image"], caption=project["title"])
+            try:
+                st.image(project["image"], caption=project["title"])
+            except:
+                st.write("이미지 준비 중...")
             st.write(f"**{project['title']}**")
             st.write(project["description"])
 
 # 프로젝트 페이지
 elif selected == "프로젝트":
     st.title("프로젝트")
-    # 프로젝트 상세 내용 추가 예정
+    st.write("프로젝트 상세 내용 준비 중입니다...")
 
 # 3D 뷰어 페이지
 elif selected == "3D 뷰어":
-    st.title("3D 모델 뷰어")
-    st.write("3D 모델을 로드하는 중...")
-    # Three.js 통합 예정
+    st.title("3D 모델 갤러리")
+    st.write("갤러리 준비 중입니다...")
 
 # 연락처 페이지
 elif selected == "연락처":
