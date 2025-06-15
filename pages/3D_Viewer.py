@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import os
 
 st.set_page_config(
     page_title="3D 뷰어 - 조환희 포트폴리오",
@@ -13,7 +14,7 @@ def main():
     # 뷰어 모드 선택
     viewer_mode = st.radio(
         "뷰어 모드 선택",
-        ["X-ray 뷰어", "워크스루 뷰어"],
+        ["X-ray 뷰어", "워크스루 뷰어", "파노라마 뷰어"],
         horizontal=True
     )
     
@@ -36,7 +37,7 @@ def main():
             scrolling=False
         )
         
-    else:  # 워크스루 뷰어
+    elif viewer_mode == "워크스루 뷰어":
         st.markdown("""
         ### 워크스루 뷰어
         건물 내부를 자유롭게 탐색할 수 있는 워크스루 뷰어입니다.
@@ -51,6 +52,24 @@ def main():
         # 워크스루 GIF
         st.markdown("### 워크스루 시연")
         st.image("static/images/워크스루영상(1).gif", caption="워크스루 시연 영상")
+        
+    else:  # 파노라마 뷰어
+        st.markdown("""
+        ### 360° 파노라마 뷰어
+        건물의 전체 공간을 360도로 탐색할 수 있는 파노라마 뷰어입니다.
+        """)
+        
+        # Kuula.co 파노라마 뷰어
+        components.iframe(
+            "https://kuula.co/share/hH1tK?fs=1&vr=0&thumbs=1&chromeless=0&logo=0",
+            height=600,
+            scrolling=False
+        )
+        st.markdown("""
+        > 파노라마 뷰어를 통해 공간을 자유롭게 탐색할 수 있습니다.
+        - 마우스 드래그: 시점 회전
+        - 마우스 휠: 확대/축소
+        """)
 
 if __name__ == "__main__":
     main() 
