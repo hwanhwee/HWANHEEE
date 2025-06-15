@@ -73,11 +73,14 @@ elif selected == "프로젝트":
     이 프로젝트는 실내 공간의 구조를 이해하고 시각화하는 도구를 개발했습니다.
     """)
     
-    # 3D 모델 GIF 추가
+    # 워크스루 영상 추가
+    st.subheader("워크스루 영상")
     try:
-        st.image("static/images/project_gif.gif", caption="3D 모델 시연")
+        video_file = open("static/videos/워크스루영상.MP4", "rb")
+        video_bytes = video_file.read()
+        st.video(video_bytes)
     except:
-        st.write("GIF 로딩 중...")
+        st.write("영상 로딩 중...")
     
     st.write("""
     #### 주요 기능
