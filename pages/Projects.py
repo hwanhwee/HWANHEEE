@@ -95,20 +95,26 @@ def main():
     
     # 파노라마 뷰어
     st.markdown("### 360° 파노라마 뷰어")
-    components.html("""
-    <div id="panorama-viewer" style="width: 100%; height: 500px;"></div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <script>
-        pannellum.viewer('panorama-viewer', {
-            type: 'equirectangular',
-            panorama: 'https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/compact_house_Panorama.jpg',
-            autoLoad: true,
-            autoRotate: -2,
-            compass: true
-        });
-    </script>
-    """, height=500)
+    
+    # 파노라마 이미지 표시
+    panorama_image = "static/images/compact_house_Panorama.jpg"
+    if os.path.exists(panorama_image):
+        components.html(f"""
+        <div id="panorama-viewer" style="width: 100%; height: 500px;"></div>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+        <script>
+            pannellum.viewer('panorama-viewer', {{
+                type: 'equirectangular',
+                panorama: '{panorama_image}',
+                autoLoad: true,
+                autoRotate: -2,
+                compass: true
+            }});
+        </script>
+        """, height=500)
+    else:
+        st.error("파노라마 이미지를 찾을 수 없습니다.")
     
     # 프로젝트 설명
     st.markdown("""
