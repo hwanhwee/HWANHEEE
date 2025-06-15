@@ -23,10 +23,11 @@ def main():
     
     # 프로젝트 이미지
     try:
-        st.image("https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/compact_house_thumbnail.PNG", 
-                caption="컴팩트 하우스 프로젝트")
+        st.image("static/images/compact_house_thumbnail.PNG", 
+                caption="컴팩트 하우스 프로젝트",
+                use_column_width=True)
     except Exception as e:
-        st.error("썸네일 이미지를 불러올 수 없습니다.")
+        st.error(f"썸네일 이미지를 불러올 수 없습니다: {str(e)}")
     
     # X-ray 뷰어
     st.markdown("### X-ray 뷰어")
@@ -96,21 +97,23 @@ def main():
     
     # 워크스루 GIF
     try:
-        st.image("https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/워크스루영상(1).gif", 
-                caption="워크스루 시연")
+        st.image("static/images/워크스루영상(1).gif", 
+                caption="워크스루 시연",
+                use_column_width=True)
     except Exception as e:
-        st.error("워크스루 GIF를 불러올 수 없습니다.")
+        st.error(f"워크스루 GIF를 불러올 수 없습니다: {str(e)}")
     
     # 파노라마 뷰어
     st.markdown("### 360° 파노라마 뷰어")
     try:
-        st.image("https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/compact_house_Panorama.jpg", 
-                caption="360° 파노라마 뷰")
+        st.image("static/images/compact_house_Panorama.jpg", 
+                caption="360° 파노라마 뷰",
+                use_column_width=True)
         st.markdown("""
         > 파노라마 이미지를 클릭하면 전체 화면으로 볼 수 있습니다.
         """)
     except Exception as e:
-        st.error("파노라마 이미지를 불러올 수 없습니다.")
+        st.error(f"파노라마 이미지를 불러올 수 없습니다: {str(e)}")
     
     # 프로젝트 설명
     st.markdown("""
