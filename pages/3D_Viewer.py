@@ -78,7 +78,7 @@ def main():
         # Sketchfab 모델 임베드
         st.markdown("### 3D 모델 뷰어")
         components.iframe(
-            "https://sketchfab.com/models/pyoHw/embed",
+            "https://sketchfab.com/models/01097ceec47c46b9b0545e99ecd2817a/embed",
             height=600,
             scrolling=False
         )
