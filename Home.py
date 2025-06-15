@@ -122,15 +122,26 @@ elif selected == "프로젝트":
 # 3D 뷰어 페이지
 elif selected == "3D 뷰어":
     st.title("3D 모델 갤러리")
+    
+    # Sketchfab 임베드
     st.write("""
     ### 프로젝트 3D 모델
-    각 프로젝트의 3D 모델을 확인할 수 있습니다.
+    아래 3D 모델을 마우스로 회전하고 확대/축소하여 살펴볼 수 있습니다.
+    """)
     
+    # Sketchfab iframe
+    st.components.v1.iframe(
+        "https://sketchfab.com/3d-models/model-colored-e1367b99316e4c3fa0ce5737abd648bf/embed",
+        height=600,
+        scrolling=False
+    )
+    
+    st.write("""
     #### 사용 방법
-    1. 모델 선택
-    2. 마우스로 회전
-    3. 휠로 확대/축소
-    4. 우클릭으로 이동
+    1. 마우스 왼쪽 버튼 드래그: 모델 회전
+    2. 마우스 휠: 확대/축소
+    3. 마우스 오른쪽 버튼 드래그: 이동
+    4. 더블 클릭: 초기화
     
     #### 지원 형식
     - GLB
