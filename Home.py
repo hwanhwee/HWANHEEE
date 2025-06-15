@@ -76,7 +76,7 @@ elif selected == "프로젝트":
     # 워크스루 영상 추가
     st.subheader("워크스루 영상")
     try:
-        st.image("static/images/project_gif.gif", caption="3D 모델 워크스루")
+        st.image("static/images/워크스루영상(1).gif", caption="3D 모델 워크스루")
     except Exception as e:
         st.write(f"이미지 로딩 중... (오류: {str(e)})")
     
