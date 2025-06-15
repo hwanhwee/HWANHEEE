@@ -75,6 +75,14 @@ def main():
         </script>
         """, height=600)
         
+        # Sketchfab 모델 임베드
+        st.markdown("### 3D 모델 뷰어")
+        components.iframe(
+            "https://sketchfab.com/models/pyoHw/embed",
+            height=600,
+            scrolling=False
+        )
+        
     else:  # 워크스루 뷰어
         st.markdown("""
         ### 워크스루 뷰어
