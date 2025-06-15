@@ -78,7 +78,7 @@ elif selected == "프로젝트":
     try:
         video_file = open("static/videos/워크스루영상.mp4", "rb")
         video_bytes = video_file.read()
-        st.video(video_bytes)
+        st.video(video_bytes, format="video/mp4", start_time=0)
     except Exception as e:
         st.write(f"영상 로딩 중... (오류: {str(e)})")
     
