@@ -29,92 +29,37 @@ def main():
     except Exception as e:
         st.error(f"썸네일 이미지를 불러올 수 없습니다: {str(e)}")
     
-    # X-ray 뷰어
-    st.markdown("### X-ray 뷰어")
-    st.markdown("""
-    X-ray 뷰어를 통해 건물의 내부 구조를 투시할 수 있습니다.
-    - 마우스 왼쪽 버튼: 회전
-    - 마우스 오른쪽 버튼: 이동
-    - 마우스 휠: 확대/축소
-    """)
+    # 도면 및 섹션
+    st.markdown("### 도면 및 섹션")
     
-    # 3D 모델 뷰어
-    components.html("""
-    <div id="viewer-container" style="width: 100%; height: 600px;"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script>
-        // Three.js 초기화
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(document.getElementById('viewer-container').offsetWidth, 600);
-        document.getElementById('viewer-container').appendChild(renderer.domElement);
-
-        // 조명 설정
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight.position.set(0, 1, 0);
-        scene.add(directionalLight);
-
-        // 컨트롤 설정
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-
-        // 카메라 위치 설정
-        camera.position.z = 5;
-
-        // 애니메이션 루프
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // 창 크기 조절 대응
-        window.addEventListener('resize', onWindowResize, false);
-        function onWindowResize() {
-            camera.aspect = document.getElementById('viewer-container').offsetWidth / 600;
-            camera.updateProjectionMatrix();
-            renderer.setSize(document.getElementById('viewer-container').offsetWidth, 600);
-        }
-    </script>
-    """, height=600)
+    col1, col2 = st.columns(2)
     
-    # 워크스루 뷰어
-    st.markdown("### 워크스루 뷰어")
-    st.markdown("""
-    워크스루 뷰어를 통해 건물 내부를 자유롭게 탐색할 수 있습니다.
-    - W, A, S, D: 이동
-    - 마우스: 시점 변경
-    - Shift: 달리기
-    - Space: 점프
-    """)
+    with col1:
+        st.markdown("#### 평면도")
+        try:
+            st.image("static/images/floor_plans.PNG",
+                    caption="평면도",
+                    use_container_width=True)
+        except Exception as e:
+            st.error(f"평면도 이미지를 불러올 수 없습니다: {str(e)}")
     
-    # 워크스루 GIF
+    with col2:
+        st.markdown("#### 입면도")
+        try:
+            st.image("static/images/3D_sections.PNG",
+                    caption="입면도",
+                    use_container_width=True)
+        except Exception as e:
+            st.error(f"입면도 이미지를 불러올 수 없습니다: {str(e)}")
+    
+    # 3D 섹션
+    st.markdown("#### 3D 섹션")
     try:
-        st.image("static/images/워크스루영상(1).gif", 
-                caption="워크스루 시연",
+        st.image("static/images/3D_sections.PNG",
+                caption="3D 섹션",
                 use_container_width=True)
     except Exception as e:
-        st.error(f"워크스루 GIF를 불러올 수 없습니다: {str(e)}")
-    
-    # 파노라마 뷰어
-    st.markdown("### 360° 파노라마 뷰어")
-    components.iframe(
-        "https://kuula.co/share/hH1tK?fs=1&vr=0&thumbs=1&chromeless=0&logo=0",
-        height=600,
-        scrolling=False
-    )
-    st.markdown("""
-    > 파노라마 뷰어를 통해 공간을 자유롭게 탐색할 수 있습니다.
-    - 마우스 드래그: 시점 회전
-    - 마우스 휠: 확대/축소
-    """)
+        st.error(f"3D 섹션 이미지를 불러올 수 없습니다: {str(e)}")
     
     # 프로젝트 설명
     st.markdown("""
@@ -122,9 +67,10 @@ def main():
     이 프로젝트는 기존 주택을 리모델링하여 더 효율적이고 현대적인 공간을 만드는 것을 목표로 합니다.
     
     #### 주요 특징
-    - X-ray 뷰어를 통한 구조 분석
-    - 워크스루 기능으로 공간 체험
-    - 360° 파노라마 뷰어로 전체 공간 감상
+    - 효율적인 공간 활용
+    - 현대적인 디자인 요소
+    - 자연 채광 최적화
+    - 유동적인 공간 구성
     """)
 
 if __name__ == "__main__":
