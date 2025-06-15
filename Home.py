@@ -76,11 +76,9 @@ elif selected == "프로젝트":
     # 워크스루 영상 추가
     st.subheader("워크스루 영상")
     try:
-        video_file = open("static/videos/워크스루영상.mp4", "rb")
-        video_bytes = video_file.read()
-        st.video(video_bytes, format="video/mp4", start_time=0)
+        st.image("static/images/project_gif.gif", caption="3D 모델 워크스루")
     except Exception as e:
-        st.write(f"영상 로딩 중... (오류: {str(e)})")
+        st.write(f"이미지 로딩 중... (오류: {str(e)})")
     
     st.write("""
     #### 주요 기능
