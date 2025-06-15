@@ -76,7 +76,7 @@ elif selected == "프로젝트":
     # 워크스루 영상 추가
     st.subheader("워크스루 영상")
     try:
-        video_file = open("C:/Users/HHC/DEV/GEN AI TEST_10주차/11주차/워크스루영상.MP4", "rb")
+        video_file = open("C:/Users/HHC/DEV/GEN AI TEST_10주차/11주차/워크스루영상.mp4", "rb")
         video_bytes = video_file.read()
         st.video(video_bytes)
     except Exception as e:
