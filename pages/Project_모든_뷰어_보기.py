@@ -3,13 +3,13 @@ import streamlit.components.v1 as components
 import os
 
 st.set_page_config(
-    page_title="3D 뷰어 - 조환희 포트폴리오",
+    page_title="Project_모든 뷰어 보기 - 조환희 포트폴리오",
     page_icon="🏠",
     layout="wide"
 )
 
 def main():
-    st.title("3D 뷰어")
+    st.title("Project_모든 뷰어 보기")
     
     # 뷰어 모드 선택
     viewer_mode = st.radio(
