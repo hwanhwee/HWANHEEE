@@ -71,7 +71,15 @@ elif selected == "프로젝트":
     st.write("""
     ### X-RAY 뷰어 & Walk-through 모드
     이 프로젝트는 실내 공간의 구조를 이해하고 시각화하는 도구를 개발했습니다.
+    """)
     
+    # 3D 모델 GIF 추가
+    try:
+        st.image("static/images/project_gif.gif", caption="3D 모델 시연")
+    except:
+        st.write("GIF 로딩 중...")
+    
+    st.write("""
     #### 주요 기능
     - X-RAY 뷰어: 벽을 투과하여 공간 구조를 볼 수 있는 기능
     - Walk-through 모드: 실제 공간을 걷는 것처럼 체험할 수 있는 기능
