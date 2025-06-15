@@ -25,7 +25,7 @@ def main():
     try:
         st.image("static/images/compact_house_thumbnail.PNG", 
                 caption="컴팩트 하우스 프로젝트",
-                use_column_width=True)
+                use_container_width=True)
     except Exception as e:
         st.error(f"썸네일 이미지를 불러올 수 없습니다: {str(e)}")
     
@@ -99,7 +99,7 @@ def main():
     try:
         st.image("static/images/워크스루영상(1).gif", 
                 caption="워크스루 시연",
-                use_column_width=True)
+                use_container_width=True)
     except Exception as e:
         st.error(f"워크스루 GIF를 불러올 수 없습니다: {str(e)}")
     
@@ -108,7 +108,7 @@ def main():
     try:
         st.image("static/images/compact_house_Panorama.jpg", 
                 caption="360° 파노라마 뷰",
-                use_column_width=True)
+                use_container_width=True)
         st.markdown("""
         > 파노라마 이미지를 클릭하면 전체 화면으로 볼 수 있습니다.
         """)
