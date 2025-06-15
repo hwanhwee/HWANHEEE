@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 import os
 
 st.set_page_config(
-    page_title="Projects - 조환희 포트폴리오",
+    page_title="Project 개요 - 조환희 포트폴리오",
     page_icon="🏠",
     layout="wide"
 )
@@ -13,7 +13,7 @@ def load_css():
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 def main():
-    st.title("프로젝트")
+    st.title("Project 개요")
     
     # 프로젝트 소개
     st.markdown("""
