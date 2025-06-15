@@ -22,7 +22,11 @@ def main():
     """)
     
     # 프로젝트 이미지
-    st.image("static/images/compact_house_thumbnail.PNG", caption="컴팩트 하우스 프로젝트")
+    try:
+        st.image("https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/compact_house_thumbnail.PNG", 
+                caption="컴팩트 하우스 프로젝트")
+    except Exception as e:
+        st.error("썸네일 이미지를 불러올 수 없습니다.")
     
     # X-ray 뷰어
     st.markdown("### X-ray 뷰어")
@@ -91,20 +95,22 @@ def main():
     """)
     
     # 워크스루 GIF
-    st.image("static/images/워크스루영상(1).gif", caption="워크스루 시연")
+    try:
+        st.image("https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/워크스루영상(1).gif", 
+                caption="워크스루 시연")
+    except Exception as e:
+        st.error("워크스루 GIF를 불러올 수 없습니다.")
     
     # 파노라마 뷰어
     st.markdown("### 360° 파노라마 뷰어")
-    
-    # 파노라마 이미지 표시
-    panorama_image = "static/images/compact_house_Panorama.jpg"
-    if os.path.exists(panorama_image):
-        st.image(panorama_image, caption="360° 파노라마 뷰")
+    try:
+        st.image("https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/compact_house_Panorama.jpg", 
+                caption="360° 파노라마 뷰")
         st.markdown("""
         > 파노라마 이미지를 클릭하면 전체 화면으로 볼 수 있습니다.
         """)
-    else:
-        st.error("파노라마 이미지를 찾을 수 없습니다.")
+    except Exception as e:
+        st.error("파노라마 이미지를 불러올 수 없습니다.")
     
     # 프로젝트 설명
     st.markdown("""
