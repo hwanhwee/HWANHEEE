@@ -14,14 +14,14 @@ def main():
     # 뷰어 모드 선택
     viewer_mode = st.radio(
         "뷰어 모드 선택",
-        ["X-ray 뷰어", "워크스루 뷰어", "파노라마 뷰어"],
+        ["3D 모델 뷰어", "워크스루 뷰어", "파노라마 뷰어"],
         horizontal=True
     )
     
-    if viewer_mode == "X-ray 뷰어":
+    if viewer_mode == "3D 모델 뷰어":
         st.markdown("""
-        ### X-ray 뷰어
-        건물의 내부 구조를 투시할 수 있는 X-ray 뷰어입니다.
+        ### 3D 모델 뷰어
+        건물의 3D 모델을 자유롭게 탐색할 수 있는 뷰어입니다.
         
         #### 조작 방법
         - 마우스 왼쪽 버튼: 회전
