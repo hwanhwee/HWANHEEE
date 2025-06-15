@@ -129,7 +129,7 @@ elif selected == "프로젝트":
 
 # 3D 뷰어 페이지
 elif selected == "3D 뷰어":
-    st.title("3D 모델 갤러리")
+    st.title("3D 뷰어")
     
     # Sketchfab 임베드
     st.write("""

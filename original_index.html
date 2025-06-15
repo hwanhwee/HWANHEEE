@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조환희 디지털 전시전</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #1B4B8F;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #357ABD;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+            background: linear-gradient(rgba(27,75,143,0.7), rgba(27,75,143,0.7)), url('https://research.yonsei.ac.kr/_res/research/img/main/img-main-vi01.jpg') center/cover no-repeat;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #fff;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #357ABD;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #fff;
+            color: #357ABD;
+            border: 2px solid #357ABD;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: #357ABD;
+            color: #fff;
+            border: 2px solid #357ABD;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background-color: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            transition: transform 0.3s ease;
+            border: 1px solid #1B4B8F;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #357ABD;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #1B4B8F;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        /* Exhibition Section */
+        .exhibition {
+            padding: 4rem 0;
+            background-color: #f8f9fa;
+        }
+
+        .exhibition-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            border: 1.5px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-height: 320px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(27,75,143,0.18);
+            border-color: #357ABD;
+        }
+
+        .project-card.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .project-info {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0.5rem 1.5rem 0.5rem;
+        }
+
+        .project-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1B4B8F;
+        }
+
+        .project-info p {
+            margin: 0.5rem 0 0 0;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1B4B8F;
+            color: #fff;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .exhibition-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .exhibition-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="https://www.yonsei.ac.kr/_res/sc/img/common/logo.png" alt="연세대학교 로고">
+                    <span class="logo-text">조환희 디지털 전시전</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#exhibition">전시</a>
+                    <a href="#about">소개</a>
+                    <a href="#contact">연락처</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>조환희 디지털 전시전</h1>
+            <p>실내건축학을 전공한 조환희의 디지털 포트폴리오입니다.</p>
+            <a href="#exhibition" class="btn btn-primary">전시 보기</a>
+            <a href="#contact" class="btn btn-secondary">연락하기</a>
+        </div>
+    </section>
+
+    <section class="features" id="about">
+        <div class="container">
+            <h2>주요 프로젝트</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>실내건축스튜디오(1)-2학년</h3>
+                    <p>X-RAY 뷰어 & Walk-through 모드</p>
+                </div>
+                <div class="feature-card">
+                    <h3>실내건축스튜디오(2)-3학년</h3>
+                    <p>공간 설계 프로젝트</p>
+                </div>
+                <div class="feature-card">
+                    <h3>실내건축스튜디오(3)-4학년</h3>
+                    <p>졸업 작품</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="exhibition" id="exhibition">
+        <div class="container">
+            <h2>전시 작품</h2>
+            <div class="exhibition-grid">
+                <a href="compact house project.html" class="project-card">
+                    <img src="compact house project_thumbnail.PNG" alt="Compact House Project" class="project-image">
+                    <div class="project-info">
+                        <h3>Compact House Project</h3>
+                        <p>실내건축스튜디오(1)-2학년</p>
+                    </div>
+                </a>
+                <a href="#" class="project-card disabled">
+                    <img src="exhibition2_thumbnail.jpg" alt="Exhibition 2" class="project-image">
+                    <div class="project-info">
+                        <h3>Exhibition 2</h3>
+                        <p>실내건축스튜디오(2)-3학년</p>
+                    </div>
+                </a>
+                <a href="#" class="project-card disabled">
+                    <img src="exhibition3_thumbnail.jpg" alt="Exhibition 3" class="project-image">
+                    <div class="project-info">
+                        <h3>Exhibition 3</h3>
+                        <p>실내건축스튜디오(3)-4학년</p>
+                    </div>
+                </a>
+                <a href="#" class="project-card disabled">
+                    <img src="exhibition4_thumbnail.jpg" alt="Exhibition 4" class="project-image">
+                    <div class="project-info">
+                        <h3>Exhibition 4</h3>
+                        <p>추가 프로젝트</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>연락처</h3>
+                    <p>이메일: happyi0305@yonsei.ac.kr</p>
+                    <p>전화번호: 010-1234-5678</p>
+                </div>
+                <div class="footer-section">
+                    <h3>위치</h3>
+                    <p>서울시 서대문구 연세로 50</p>
+                    <p>연세대학교 325동(삼성관) 110호</p>
+                    <p>생활과학대학 실내건축학과 사무실</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

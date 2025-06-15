@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image
+import streamlit.components.v1 as components
 
 st.set_page_config(
     page_title="3D 뷰어 - 조환희 포트폴리오",
@@ -7,36 +7,136 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("3D 모델 갤러리")
+def main():
+    st.title("3D 뷰어")
+    
+    # 뷰어 모드 선택
+    viewer_mode = st.radio(
+        "뷰어 모드 선택",
+        ["X-ray 뷰어", "워크스루 뷰어"],
+        horizontal=True
+    )
+    
+    if viewer_mode == "X-ray 뷰어":
+        st.markdown("""
+        ### X-ray 뷰어
+        건물의 내부 구조를 투시할 수 있는 X-ray 뷰어입니다.
+        
+        #### 조작 방법
+        - 마우스 왼쪽 버튼: 회전
+        - 마우스 오른쪽 버튼: 이동
+        - 마우스 휠: 확대/축소
+        """)
+        
+        # X-ray 뷰어 컴포넌트
+        components.html("""
+        <div id="xray-viewer" style="width: 100%; height: 600px;"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+        <script>
+            // Three.js 초기화
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(document.getElementById('xray-viewer').offsetWidth, 600);
+            document.getElementById('xray-viewer').appendChild(renderer.domElement);
 
-# 갤러리 섹션
-st.header("Walk-through 모드")
-st.image("static/images/project_gif.gif", caption="Walk-through 모드")
+            // 조명 설정
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight.position.set(0, 1, 0);
+            scene.add(directionalLight);
 
-# 이미지 갤러리
-st.header("갤러리")
-col1, col2 = st.columns(2)
-with col1:
-    st.image("static/images/compact_house_thumbnail.PNG", caption="전체 뷰")
-with col2:
-    st.image("static/images/compact_house_Panorama.jpg", caption="파노라마 뷰")
+            // 컨트롤 설정
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
 
-# 추가 섹션
-st.header("평면도 및 단면도")
-col3, col4 = st.columns(2)
-with col3:
-    st.image("static/images/floor_plans.PNG", caption="평면도")
-with col4:
-    st.image("static/images/3D_sections.PNG", caption="3D 단면도")
+            // 카메라 위치 설정
+            camera.position.z = 5;
 
-# 설명
-st.markdown("""
-### 프로젝트 설명
-이 프로젝트는 2학년 실내건축스튜디오에서 진행한 작품입니다.
-Walk-through 모드와 갤러리를 통해 공간을 다양한 관점에서 탐색할 수 있습니다.
+            // 애니메이션 루프
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            animate();
 
-### 사용된 기술
-- 3D 모델링: SketchUp
-- 렌더링: V-Ray
-- 애니메이션: Blender
-""") 
+            // 창 크기 조절 대응
+            window.addEventListener('resize', onWindowResize, false);
+            function onWindowResize() {
+                camera.aspect = document.getElementById('xray-viewer').offsetWidth / 600;
+                camera.updateProjectionMatrix();
+                renderer.setSize(document.getElementById('xray-viewer').offsetWidth, 600);
+            }
+        </script>
+        """, height=600)
+        
+    else:  # 워크스루 뷰어
+        st.markdown("""
+        ### 워크스루 뷰어
+        건물 내부를 자유롭게 탐색할 수 있는 워크스루 뷰어입니다.
+        
+        #### 조작 방법
+        - W, A, S, D: 이동
+        - 마우스: 시점 변경
+        - Shift: 달리기
+        - Space: 점프
+        """)
+        
+        # 워크스루 뷰어 컴포넌트
+        components.html("""
+        <div id="walkthrough-viewer" style="width: 100%; height: 600px;"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/FirstPersonControls.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+        <script>
+            // Three.js 초기화
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(document.getElementById('walkthrough-viewer').offsetWidth, 600);
+            document.getElementById('walkthrough-viewer').appendChild(renderer.domElement);
+
+            // 조명 설정
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight.position.set(0, 1, 0);
+            scene.add(directionalLight);
+
+            // 컨트롤 설정
+            const controls = new THREE.FirstPersonControls(camera, renderer.domElement);
+            controls.movementSpeed = 10;
+            controls.lookSpeed = 0.1;
+
+            // 카메라 위치 설정
+            camera.position.set(0, 1.6, 0);  // 사람의 눈 높이
+
+            // 애니메이션 루프
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update(0.1);
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // 창 크기 조절 대응
+            window.addEventListener('resize', onWindowResize, false);
+            function onWindowResize() {
+                camera.aspect = document.getElementById('walkthrough-viewer').offsetWidth / 600;
+                camera.updateProjectionMatrix();
+                renderer.setSize(document.getElementById('walkthrough-viewer').offsetWidth, 600);
+            }
+        </script>
+        """, height=600)
+    
+    # 워크스루 GIF
+    st.markdown("### 워크스루 시연")
+    st.image("static/images/워크스루영상(1).gif", caption="워크스루 시연 영상")
+
+if __name__ == "__main__":
+    main() 
