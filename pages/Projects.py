@@ -102,7 +102,7 @@ def main():
     <script>
         pannellum.viewer('panorama-viewer', {
             type: 'equirectangular',
-            panorama: 'static/images/compact_house_Panorama.jpg',
+            panorama: 'https://raw.githubusercontent.com/hwanhwee/HWANHEEE/main/streamlit_portfolio/static/images/compact_house_Panorama.jpg',
             autoLoad: true,
             autoRotate: -2,
             compass: true
