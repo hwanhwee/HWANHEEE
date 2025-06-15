@@ -105,15 +105,16 @@ def main():
     
     # 파노라마 뷰어
     st.markdown("### 360° 파노라마 뷰어")
-    try:
-        st.image("static/images/compact_house_Panorama.jpg", 
-                caption="360° 파노라마 뷰",
-                use_container_width=True)
-        st.markdown("""
-        > 파노라마 이미지를 클릭하면 전체 화면으로 볼 수 있습니다.
-        """)
-    except Exception as e:
-        st.error(f"파노라마 이미지를 불러올 수 없습니다: {str(e)}")
+    components.iframe(
+        "https://kuula.co/share/hH1tK?fs=1&vr=0&thumbs=1&chromeless=0&logo=0",
+        height=600,
+        scrolling=False
+    )
+    st.markdown("""
+    > 파노라마 뷰어를 통해 공간을 자유롭게 탐색할 수 있습니다.
+    - 마우스 드래그: 시점 회전
+    - 마우스 휠: 확대/축소
+    """)
     
     # 프로젝트 설명
     st.markdown("""
