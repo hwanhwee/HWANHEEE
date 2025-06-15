@@ -25,7 +25,6 @@ with st.sidebar:
 # 홈 페이지
 if selected == "홈":
     st.title("조환희 디지털 포트폴리오")
-    st.subheader("연세대학교 생활과학대학 실내건축학전공")
     
     # 소개 섹션
     st.write("""
